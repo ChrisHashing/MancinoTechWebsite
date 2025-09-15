@@ -1,0 +1,161 @@
+.container {
+    padding: 20px;
+    background: #fafafa;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.userEmail {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Buttons */
+.btn {
+    padding: 6px 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Search */
+.searchRow {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.searchInput:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Messages */
+.success {
+    color: green;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+}
+
+.loading {
+    font-size: 1rem;
+    color: #666;
+    padding: 12px;
+}
+
+/* Table */
+.tableWrap {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.th {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 8px;
+    background: #f9f9f9;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.td {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px 8px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.clickableRow {
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.clickableRow:hover {
+    background: #f5f9ff;
+}
+
+/* Status badge */
+.statusBadge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    text-transform: capitalize;
+}
+
+/* Pager */
+.pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.count {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}

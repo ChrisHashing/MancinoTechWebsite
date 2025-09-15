@@ -1,0 +1,348 @@
+.footer {
+    background-color: #ffffff;
+    padding: 3rem 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.topSection {
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.subtitle {
+    letter-spacing: 2px;
+    font-size: 0.6rem;
+    color: #6B7280;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #0F172A;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: #6B7280;
+    max-width: 400px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    line-height: 20px;
+}
+
+.button {
+    background-color: #1f1f1f;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    border-radius: 7px;
+}
+
+.button:hover {
+    background-color: #0d4580;
+}
+
+.copy {
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.bottomSection {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.left {
+    font-weight: 400;
+    font-size: 0.875rem;
+}
+
+.center {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 120px;
+}
+
+.center a {
+    color: #1F2937;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.right {
+    display: flex;
+    gap: 1rem;
+}
+
+.right a {
+    background: #F3F4F6;
+    border-radius: 50%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1F2937;
+    transition: background 0.3s;
+}
+
+.right a:hover {
+    background: #E5E7EB;
+}
+
+/* Form Styles */
+.block {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.question {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0F172A;
+    margin-bottom: 1rem;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.radioLabel:hover {
+    background-color: #F9FAFB;
+}
+
+.radioLabel input[type="radio"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.radioText {
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.styleGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 400px;
+}
+
+.card {
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    color: #374151;
+    text-align: center;
+}
+
+.card:hover {
+    border-color: #105396;
+    background: #F0F7FF;
+}
+
+.card.selected {
+    border-color: #105396;
+    background: #105396;
+    color: white;
+}
+
+.purposeGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 500px;
+}
+
+.purpose {
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    color: #374151;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.purpose:hover {
+    border-color: #105396;
+    background: #F0F7FF;
+}
+
+.purpose.selected {
+    border-color: #105396;
+    background: #105396;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .bottomSection {
+        flex-direction: column;
+    }
+
+    .left,
+    .center,
+    .right {
+        margin-left: 0px;
+    }
+
+    .center {
+        margin-left: 0px;
+    }
+
+    .styleGrid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+
+    .purposeGrid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+
+    .radioGroup {
+        align-items: stretch;
+    }
+
+    .radioLabel {
+        justify-content: center;
+    }
+}
+
+/* Responsive styles for small devices */
+@media (max-width: 480px) {
+    .footer {
+        padding: 2.5rem 0.5rem;
+        margin-top: 40px;
+    }
+
+    .topSection {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .subtitle {
+        font-size: 0.7rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .title {
+        font-size: 1.3rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        margin-bottom: 1.2rem;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 24px;
+        margin-top: 2rem;
+    }
+
+    .button {
+        width: 40%;
+        padding: 0.7rem 0;
+        font-size: 13px;
+        margin-bottom: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .copy {
+        font-size: 0.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .bottomSection {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding-top: 1rem;
+        margin-top: 2rem;
+    }
+
+    .left,
+    .center,
+    .right {
+        justify-content: center;
+        width: 100%;
+        font-size: 0.8rem;
+        margin-left: 0px;
+    }
+
+    .center {
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-left: 0px;
+    }
+
+    .center a {
+        font-size: 0.8rem;
+    }
+
+    .right {
+        gap: 0.7rem;
+    }
+
+    .right a {
+        padding: 0.4rem;
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+
+    .question {
+        font-size: 0.9rem;
+    }
+
+    .styleGrid,
+    .purposeGrid {
+        max-width: 250px;
+    }
+
+    .card,
+    .purpose {
+        padding: 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .block {
+        margin-bottom: 1.5rem;
+    }
+}
