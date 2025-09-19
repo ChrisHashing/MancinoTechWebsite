@@ -19,7 +19,11 @@ function Header() {
         >
             <div className={styles.headerContent}>
                 <NavLink to="/" className={styles.logo} style={{ textDecoration: 'none' }}>
-                    mancino
+                    <img 
+                        src="/mtlogo.png" 
+                        alt="Mancino Logo" 
+                        className={styles.logoImage}
+                    />
                 </NavLink>
 
                 {/* Desktop Navigation */}

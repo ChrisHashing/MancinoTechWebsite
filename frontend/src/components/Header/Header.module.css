@@ -2,7 +2,7 @@
 .header {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #2d55ad 0%, #0a869c 100%);
     position: fixed;
     top: 0;
     left: 0;

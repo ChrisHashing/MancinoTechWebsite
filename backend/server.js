@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const clientEmailMap = require('./clientEmailMap');
 require('dotenv').config();
 
 const app = express();
@@ -95,20 +96,51 @@ app.get('/api/auth/me', authMiddleware, (req, res) => {
 app.post('/api/leads', async (req, res) => {
     try {
         const { clientId, name, email, phone, logo, budget, deliveryDate, style, purpose, source, status, meta } = req.body;
+        
+        console.log('=== LEAD CREATION DEBUG ===');
+        console.log('Request body:', { clientId, name, email, phone, logo, budget, deliveryDate, style, purpose, source, status, meta });
+        
         // clientId is optional now; only validate required lead fields
         if (!name || !email) {
+            console.log('❌ Validation failed: Missing required fields');
             return res.status(400).json({ error: 'Missing required fields: name, email' });
         }
 
         // Build lead object and include clientId only if provided
         const leadData = { name, email, phone, logo, budget, deliveryDate, style, purpose, source, status, meta };
-        if (clientId) leadData.clientId = clientId;
+        if (clientId) {
+            leadData.clientId = clientId;
+            console.log('✅ ClientId provided:', clientId);
+        } else {
+            console.log('ℹ️ No clientId provided');
+        }
 
+        console.log('Lead data to create:', leadData);
         const lead = await Lead.create(leadData);
+        console.log('✅ Lead created successfully:', lead._id);
 
-        // Determine recipients from environment; fallback to the Gmail user
-        const recipients = (process.env.NOTIFICATION_RECIPIENTS && process.env.NOTIFICATION_RECIPIENTS.split(',').map(s => s.trim()).filter(Boolean).join(',')) || process.env.GMAIL_USER;
+        // Determine recipients based on clientId from clientEmailMap
+        let recipients;
+        console.log('=== RECIPIENT SELECTION DEBUG ===');
+        console.log('Available client mappings:', Object.keys(clientEmailMap));
+        
+        if (clientId && clientEmailMap[clientId]) {
+            recipients = clientEmailMap[clientId].join(',');
+            console.log('✅ Using client email mapping for', clientId, ':', clientEmailMap[clientId]);
+        } else {
+            // Fallback to environment variable or Gmail user
+            recipients = (process.env.NOTIFICATION_RECIPIENTS && process.env.NOTIFICATION_RECIPIENTS.split(',').map(s => s.trim()).filter(Boolean).join(',')) || process.env.GMAIL_USER;
+            console.log('⚠️ Using fallback recipients:', recipients);
+            if (clientId) {
+                console.log('❌ ClientId', clientId, 'not found in clientEmailMap');
+            }
+        }
+        
+        console.log('Final recipients:', recipients);
+
         const subject = clientId ? `New Lead for ${clientId}: ${name}` : `New Lead: ${name}`;
+        console.log('Email subject:', subject);
+        
         const text = [
             `Name: ${name}`,
             `Email: ${email}`,
@@ -124,6 +156,14 @@ app.post('/api/leads', async (req, res) => {
             .filter(Boolean)
             .join('\n');
 
+        console.log('=== EMAIL SENDING DEBUG ===');
+        console.log('Email details:', {
+            from: process.env.GMAIL_USER,
+            to: recipients,
+            subject: subject,
+            textLength: text.length
+        });
+
         try {
             await transporter.sendMail({
                 from: process.env.GMAIL_USER,
@@ -131,15 +171,17 @@ app.post('/api/leads', async (req, res) => {
                 subject,
                 text,
             });
+            console.log('✅ Email sent successfully to:', recipients);
         } catch (emailErr) {
-            console.error('Email send error:', emailErr);
+            console.error('❌ Email send error:', emailErr);
             // Do not fail the API because of email; report in response
             return res.status(201).json({ success: true, lead, emailSent: false, emailError: 'Failed to send email' });
         }
 
+        console.log('=== LEAD CREATION COMPLETE ===');
         return res.status(201).json({ success: true, lead, emailSent: true });
     } catch (err) {
-        console.error('Create lead error:', err);
+        console.error('❌ Create lead error:', err);
         return res.status(500).json({ error: 'Failed to create lead.' });
     }
 });
@@ -275,5 +317,10 @@ app.get('/seed-dummy-leads', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log('=== CLIENT EMAIL MAPPINGS ===');
+    Object.entries(clientEmailMap).forEach(([clientId, emails]) => {
+        console.log(`${clientId}:`, emails.join(', '));
+    });
+    console.log('=============================');
 });
